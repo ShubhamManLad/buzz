@@ -30,7 +30,7 @@ class _UsersScreenState extends State<UsersScreen> {
   TextEditingController controller = TextEditingController();
 
   Future<List> getUsers()async{
-    var response = await http.get(Uri.parse('https://buzzzzer.vercel.app/api/getusers'));
+    var response = await http.get(Uri.parse('https://buzzer-api.onrender.com/api/getusers'));
     print(response.body.toString());
     print(response.body.length);
     List users = jsonDecode(response.body);
@@ -44,12 +44,13 @@ class _UsersScreenState extends State<UsersScreen> {
 
   void broadcast() async{
     var response = await http.post(
-      Uri.parse('https://buzzzzer.vercel.app/api/sendbroadcast'),
+      Uri.parse('https://buzzer-api.onrender.com/api/sendbroadcast'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
         'sender': sender,
+        'body':message,
       }),
     );
     print(response.statusCode);
@@ -125,12 +126,13 @@ class _UsersScreenState extends State<UsersScreen> {
                             List data = snapshot.data ?? [];
                             return ListView.builder(
                               itemBuilder: (context, index) {
-
+                                if(data[index]?['email']!='') {
                                   return UserWidget(
                                     sender: sender,
                                     email: data[index]?['email'],
                                     message: message,
                                   );
+                                }
                               },
                               itemCount: data.length,
                             );

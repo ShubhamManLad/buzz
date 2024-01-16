@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void login(String email, String token, BuildContext context) async{
     print(token);
     var response =  await http.post(
-      Uri.parse('https://buzzzzer.vercel.app/api/login'),
+      Uri.parse('https://buzzer-api.onrender.com/api/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -60,34 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
       print('Invalid Username');
     }
     print(response.statusCode);
-
-  }
-
-  void send_message() async{
-    var response =  await http.post(
-      Uri.parse('http://192.168.55.162:3000/sendnotification'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'sender': 'darsh@gmail.com',
-        'receiver': 'darsh@gmail.com'
-
-      }),
-    );
-    print(response.statusCode);
-  }
-
-  void getUsers()async{
-    var response = await http.get(Uri.parse('http://192.168.55.162:3000/getusers'));
-    print(response.body.toString());
-    print(response.body.length);
-    List users = jsonDecode(response.body);
-    print(users.length);
-    for (var user in users){
-      print(user+"\n");
-    }
-    print(users);
 
   }
 

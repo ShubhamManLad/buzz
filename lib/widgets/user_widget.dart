@@ -13,7 +13,7 @@ class UserWidget extends StatelessWidget {
     if (message!='' || message.isNotEmpty) {
 
       var response = await http.post(
-        Uri.parse('https://buzzzzer.vercel.app/api/sendnotification'),
+        Uri.parse('https://buzzer-api.onrender.com/api/sendnotification'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -27,7 +27,7 @@ class UserWidget extends StatelessWidget {
     }
     else{
       var response = await http.post(
-        Uri.parse('https://buzzzzer.vercel.app/api/sendnotification'),
+        Uri.parse('https://buzzer-api.onrender.com/api/sendnotification'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
